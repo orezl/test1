@@ -32,6 +32,6 @@ jobs:
         run: |
           chmod 777 Dockerfile
           MANIFEST=test1.2
-          aws ecr put-image --registryid "$ECR_REGISTRY" --repository-name "$ECR_REPOSITORY" --image-tag "$IMAGE_TAG" --image-manifest "$MANIFEST"
+          aws ecr put-image --registry-id 433213351671 --repository-name "$ECR_REPOSITORY" --image-tag "$IMAGE_TAG" --image-manifest "$MANIFEST"
 #          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
 #          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
