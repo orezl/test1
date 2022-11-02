@@ -16,9 +16,11 @@ jobs:
       - name: Commit and push changes
         uses: devops-infra/action-commit-push@master
         with:
-          commit_prefix: "[AUTO-COMMIT] replace"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          commit_prefix: "[AUTO-COMMIT] foo/bar replace"
       - name: Create pull request
         uses: devops-infra/action-pull-request@master
         with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           body: "**Automated pull request**<br><br>Replaced foo/bar"
           title: ${{ github.event.commits[0].message }}
