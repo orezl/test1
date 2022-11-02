@@ -28,7 +28,7 @@ jobs:
         env:
           ECR_REGISTRY: 433213351671.dkr.ecr.ap-northeast-1.amazonaws.com
           ECR_REPOSITORY: test
-          IMAGE_TAG: test1.1
+          IMAGE_TAG: test1.2
         run: |
           chmod 777 Dockerfile
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
