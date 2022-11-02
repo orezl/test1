@@ -1,6 +1,8 @@
 name: ci-dv-publish
 on:
   workflow_dispatch:
+  push:
+    paths-ignore: ['.github/**']
 jobs:
   Publish_Image:
     runs-on: ubuntu-latest
@@ -31,10 +33,11 @@ jobs:
         env:
           ECR_REGISTRY: 433213351671.dkr.ecr.ap-northeast-1.amazonaws.com
           ECR_REPOSITORY: test
-          IMAGE_TAG: test1.3
+          IMAGE_TAG: ${GITHUB_SHA}
         run: |
           chmod 777 Dockerfile
-          MANIFEST=$(aws ecr batch-get-image --registry-id 433213351671 --repository-name "$ECR_REPOSITORY" --image-ids imageTag=test1.2 --output json | jq --raw-output --join-output '.images[0].imageManifest')
-          aws ecr put-image --registry-id 433213351671 --repository-name "$ECR_REPOSITORY" --image-tag "$IMAGE_TAG" --image-manifest "$MANIFEST"
-#          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-#          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+#          MANIFEST=$(aws ecr batch-get-image --registry-id 433213351671 --repository-name "$ECR_REPOSITORY" --image-ids imageTag=test1.2 --output json | jq --raw-output --join-output '.images[0].imageManifest')
+#          aws ecr put-image --registry-id 433213351671 --repository-name "$ECR_REPOSITORY" --image-tag "$IMAGE_TAG" --image-manifest "$MANIFEST"
+
