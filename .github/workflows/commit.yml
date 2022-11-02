@@ -1,7 +1,6 @@
 
 name: commit
 on:
-  release:
   workflow_dispatch:
 jobs:
   release:
