@@ -13,6 +13,12 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v2
       - run: chmod 777 Dockerfile
-      - uses: stefanzweifel/git-auto-commit-action@v4
+      - name: Commit and push changes
+        uses: devops-infra/action-commit-push@master
         with:
-          commit_message: Apply php-cs-fixer changes
+          commit_prefix: "[AUTO-COMMIT] replace"
+      - name: Create pull request
+        uses: devops-infra/action-pull-request@master
+        with:
+          body: "**Automated pull request**<br><br>Replaced foo/bar"
+          title: ${{ github.event.commits[0].message }}
