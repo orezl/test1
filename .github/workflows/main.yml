@@ -36,7 +36,6 @@ jobs:
           ECR_REPOSITORY: test
           #IMAGE_TAG: ${{ env.GITHUB_SHA }}
         run: |
-          chmod 777 Dockerfile
           docker build -t $ECR_REPOSITORY .
           docker tag $ECR_REPOSITORY:latest $ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_SHA
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_SHA
