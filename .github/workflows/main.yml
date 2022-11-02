@@ -4,6 +4,9 @@ on:
 jobs:
   Publish_Image:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
     steps:
       - run: env
       - name: Configure AWS Credentials
