@@ -12,15 +12,12 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v2
-      - run: chmod 777 Dockerfile
-      - name: Commit and push changes
-        uses: devops-infra/action-commit-push@master
         with:
-          github_token: ${{ secrets.PAT }}
-          commit_prefix: "[AUTO-COMMIT] foo/bar replace"
-      - name: Create pull request
-        uses: devops-infra/action-pull-request@master
-        with:
-          github_token: ${{ secrets.PAT }}
-          body: "**Automated pull request**<br><br>Replaced foo/bar"
-          title: ${{ github.event.commits[0].message }}
+          token: ${{ secrets.PAT }}
+      - run: |
+              chmod 777 Dockerfile
+              git config --global user.name 'orezl'
+              git config --global user.email 'rahulkhanna2910@gmail.com'
+              git commit -am "Automated report"
+              git push
+      
