@@ -2,6 +2,7 @@ name: ci-dv-publish
 on:
   workflow_dispatch:
   push:
+    branches: ['main']
     paths-ignore: ['.github/**']
 jobs:
   Publish_Image:
