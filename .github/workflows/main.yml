@@ -17,4 +17,5 @@ jobs:
           aws-region: us-east-2
           role-to-assume: arn:aws:iam::433213351671:role/iam_role
           role-session-name: MySessionName
+          role-duration-seconds: 1200
       - run: aws iam list-users
