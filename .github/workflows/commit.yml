@@ -3,7 +3,7 @@ name: commit
 on:
   workflow_dispatch:
 jobs:
-  release:
+  commit:
     runs-on: ubuntu-latest
     permissions:
       id-token: write
@@ -14,7 +14,7 @@ jobs:
         with:
           token: ${{ secrets.PAT }}
       - run: |
-              chmod 777 Dockerfile
+              chmod 777 test.sh
               git config --global user.name 'orezl'
               git config --global user.email 'rahulkhanna2910@gmail.com'
               git commit -am "Automated report"
