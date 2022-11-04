@@ -35,7 +35,7 @@ jobs:
           ECR_REPOSITORY: test
           IMAGE_TAG: v2.3.4
         run: |
-              MANIFEST=$(aws ecr batch-get-image --registry-id 433213351671 --repository-name "$ECR_REPOSITORY" --image-ids imageTag=v1.1.0-rc.2 --output json | jq --raw-output --join-output '.images[0].imageManifest')
+              MANIFEST=$(aws ecr batch-get-image --registry-id 433213351671 --repository-name "$ECR_REPOSITORY" --image-ids imageTag=v2-rc.1 --output json | jq --raw-output --join-output '.images[0].imageManifest')
               aws ecr put-image --registry-id 433213351671 --repository-name "$ECR_REPOSITORY" --image-tag "$IMAGE_TAG" --image-manifest "$MANIFEST"
 #          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_REF_NAME .
 #          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_REF_NAME
