@@ -15,6 +15,7 @@ jobs:
           token: ${{ secrets.PAT }}
           ref: 'v1.0.0-rc.2'
       - run: |
+              env
               cat .github/workflows/commit.yml
               chmod 777 test.sh
               git config --global user.name 'orezl'
