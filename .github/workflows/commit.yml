@@ -20,3 +20,4 @@ jobs:
               git commit -am "Automated report"
               git push
       
+#tag1.0.0-rc.1
