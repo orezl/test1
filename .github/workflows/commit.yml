@@ -19,7 +19,7 @@ jobs:
               chmod 777 test.sh
               git config --global user.name 'orezl'
               git config --global user.email 'rahulkhanna2910@gmail.com'
-              git commit -am "Automated report"
+              #git commit -am "Automated report"
               #git push
       
 #tag1.0.0-rc.1
