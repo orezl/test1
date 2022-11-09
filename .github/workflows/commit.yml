@@ -21,7 +21,7 @@ jobs:
         run: echo "stages=['dv','qa']" >> $GITHUB_OUTPUT
       - run: echo "${{steps.set.outputs.stages}}"
   commit:
-    name: ${{env.account_name}}_Stage 
+    name: ${{matrix.account}}_${{matrix.stages}}_Stage 
     needs: Matrix_setup
     strategy:
       matrix:
