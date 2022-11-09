@@ -12,23 +12,20 @@ on:
 jobs: 
   Matrix_setup:
     runs-on: ubuntu-latest
-    outputs:
-      stages: ${{steps.outputs.stages}}
+    #outputs:
+    #  stages: ${{steps.outputs.stages}}
     steps:
       - uses: actions/checkout@v2
-      - if: inputs.build_stage == 'dv'
-        run: echo "::set-output name=stages::['dv']"
-      - if: inputs.build_stage == 'qa'
-        run: echo "::set-output name=stages::['dv', 'qa']"
-      - if: inputs.build_stage == 'pd'
-        run: echo "::set-output name=stages::['dv', 'qa', 'pd']"
+      - id: 'set'
+        #run: echo "::set-output name=stages::['dv']"
+        run: echo "stages=['dv']" >> $GITHUB_OUTPUT
   commit:
     name: ${{matrix.aws_account}}_Stage 
     needs: Matrix_setup
     strategy:
       matrix:
         aws_account: [EV1, EV1]
-        stages: ${{fromJson(needs.Matrix_setup.outputs.stages)}}
+        stages: ${{fromJson(needs.Matrix_setup.steps.set.outputs.stages)}}
     runs-on: ubuntu-latest
     permissions:
       id-token: write
