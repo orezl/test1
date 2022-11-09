@@ -8,7 +8,21 @@ on:
   release:
     types: [released, prereleased]
 jobs:
+  Matrix_setup:
+    runs-on: ubuntu-latest
+    outputs:
+      stages: ${{steps.Matrix_setup.outputs.stages}}
+    steps:
+      - uses: actions/checkout@v2
+      - id: Matrix_setup
+        run: echo "::set-output name=stages::['dv','qa']"
   commit:
+    name: ${{matrix.aws_account}}_Stage 
+    needs: Matrix_setup
+    strategy:
+      matrix:
+        aws_account: [EV1, EV1]
+        stages: ${{fromJson(needs.Matrix_setup.outputs.stages)}}
     runs-on: ubuntu-latest
     permissions:
       id-token: write
@@ -20,6 +34,7 @@ jobs:
               env    
               echo "event name is:" ${{ github.event_name }} 
               echo "event type is:" ${{ github.event.action }}
+              echo "event type is:" ${{ github.event_action }}
               #cat .github/workflows/commit.yml
               #chmod 777 test.sh
               #git config --global user.name 'orezl'
