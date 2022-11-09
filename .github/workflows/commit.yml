@@ -18,14 +18,14 @@ jobs:
       - uses: actions/checkout@v2
       - id: 'set'
         #run: echo "::set-output name=stages::['dv']"
-        run: echo "stages=[dv]" >> $GITHUB_OUTPUT
+        run: echo "stages='[dv,qa]'" >> $GITHUB_OUTPUT
   commit:
     name: ${{matrix.aws_account}}_Stage 
     needs: Matrix_setup
     strategy:
       matrix:
         aws_account: [EV1, EV1]
-        stages: ${{needs.Matrix_setup.steps.set.outputs.stages}}
+        stages: ${{fromJson(needs.Matrix_setup.steps.set.outputs.stages)}}
     runs-on: ubuntu-latest
     permissions:
       id-token: write
