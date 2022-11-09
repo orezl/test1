@@ -25,8 +25,10 @@ jobs:
     needs: Matrix_setup
     strategy:
       matrix:
-        aws_account: [EV1, EV1]
+        account: [EV1, EV1]
         stages: ${{fromJson(needs.Matrix_setup.outputs.stages)}}
+    env:
+      account_name: ${{matrix.account}}'_'${{matrix.stages}}
     runs-on: ubuntu-latest
     permissions:
       id-token: write
@@ -35,7 +37,8 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v2
       - run: |
-              env    
+              env
+              echo "${{env.account_name}}"
               echo "event name is:" ${{ github.event_name }} 
               echo "event type is:" ${{ github.event.action }}
               echo "event type is:" ${{ github.event_action }}
