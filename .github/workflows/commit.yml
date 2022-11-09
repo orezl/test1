@@ -1,21 +1,26 @@
 
 name: commit
 on:
-  workflow_dispatch:
   push:
     branches: [ main ]
     paths-ignore: ['.github/**']
   release:
     types: [released, prereleased]
-jobs:
+  workflow_dispatch:
+      build_stage: {required: true, type: choice, description: "Build stage", options: [ 'dv', 'qa', 'pd' ] }
+jobs: 
   Matrix_setup:
     runs-on: ubuntu-latest
     outputs:
-      stages: ${{steps.Matrix_setup.outputs.stages}}
+      stages: ${{steps.outputs.stages}}
     steps:
       - uses: actions/checkout@v2
-      - id: Matrix_setup
-        run: echo "::set-output name=stages::['dv','qa']"
+      - if: inputs.build_stage == 'dv'
+        run: echo "::set-output name=stages::['dv']"
+      - if: inputs.build_stage == 'qa'
+        run: echo "::set-output name=stages::['dv', 'qa']"
+      - if: inputs.build_stage == 'pd'
+        run: echo "::set-output name=stages::['dv', 'qa', 'pd']
   commit:
     name: ${{matrix.aws_account}}_Stage 
     needs: Matrix_setup
