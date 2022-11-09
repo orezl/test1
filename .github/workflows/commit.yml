@@ -21,7 +21,7 @@ jobs:
       - if: inputs.build_stage == 'qa'
         run: echo "::set-output name=stages::['dv', 'qa']"
       - if: inputs.build_stage == 'pd'
-        run: echo "::set-output name=stages::['dv', 'qa', 'pd']
+        run: echo "::set-output name=stages::['dv', 'qa', 'pd']"
   commit:
     name: ${{matrix.aws_account}}_Stage 
     needs: Matrix_setup
