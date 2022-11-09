@@ -21,14 +21,14 @@ jobs:
         run: echo "stages=['dv','qa']" >> $GITHUB_OUTPUT
       - run: echo "${{steps.set.outputs.stages}}"
   commit:
-    name: ${{matrix.aws_account}}_Stage 
+    name: ${{env.account_name}}_Stage 
     needs: Matrix_setup
     strategy:
       matrix:
         account: [EV1, EV1]
         stages: ${{fromJson(needs.Matrix_setup.outputs.stages)}}
     env:
-      account_name: ${{matrix.account}}'_'${{matrix.stages}}
+      account_name: ${{matrix.account}}_${{matrix.stages}}
     runs-on: ubuntu-latest
     permissions:
       id-token: write
