@@ -19,7 +19,7 @@ jobs:
       - id: 'set'
         #run: echo "::set-output name=stages::['dv']"
         run: echo "stages=\[dv,qa\]" >> $GITHUB_OUTPUT
-      - run: echo "${{steps.set.outputs.stages}"
+      - run: echo "${{steps.set.outputs.stages}}"
   commit:
     name: ${{matrix.aws_account}}_Stage 
     needs: Matrix_setup
