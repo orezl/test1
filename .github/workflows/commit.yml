@@ -7,6 +7,7 @@ on:
   release:
     types: [released, prereleased]
   workflow_dispatch:
+    inputs:
       build_stage: {required: true, type: choice, description: "Build stage", options: [ 'dv', 'qa', 'pd' ] }
 jobs: 
   Matrix_setup:
