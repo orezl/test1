@@ -2,6 +2,11 @@
 name: commit
 on:
   workflow_dispatch:
+  push:
+    branches: [ main ]
+    paths-ignore: ['.github/**']
+  release:
+    types: [released, prereleased]
 jobs:
   commit:
     runs-on: ubuntu-latest
@@ -12,8 +17,9 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v2
       - run: |
-              env
-              echo "${{github.event.action}}"
+              env    
+              echo "event name is:" ${{ github.event_name }} 
+              echo "event type is:" ${{ github.event.action }}
               #cat .github/workflows/commit.yml
               #chmod 777 test.sh
               #git config --global user.name 'orezl'
