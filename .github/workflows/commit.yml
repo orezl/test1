@@ -11,15 +11,13 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v2
-        with:
-          token: ${{ secrets.PAT }}
-          ref: 'v1.0.0-rc.2'
       - run: |
               env
-              cat .github/workflows/commit.yml
-              chmod 777 test.sh
-              git config --global user.name 'orezl'
-              git config --global user.email 'rahulkhanna2910@gmail.com'
+              echo ${{github.event.type}
+              #cat .github/workflows/commit.yml
+              #chmod 777 test.sh
+              #git config --global user.name 'orezl'
+              #git config --global user.email 'rahulkhanna2910@gmail.com'
               #git commit -am "Automated report"
               #git push
       
