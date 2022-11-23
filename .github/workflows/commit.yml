@@ -31,7 +31,7 @@ jobs:
         env:
           ECR_REGISTRY: 433213351671.dkr.ecr.ap-northeast-1.amazonaws.com
           ECR_REPOSITORY: test
-          IMAGE_TAG: ${{ env.GITHUB_SHA }}
+          IMAGE_TAG: test1.1.1
         run: |
           aws ecr describe-image-replication-status --repository-name "$ECR_REPOSITORY" --image-id imageTag=image_tag  
       # --region us-west-2
