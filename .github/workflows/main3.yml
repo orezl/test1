@@ -33,7 +33,7 @@ jobs:
         env:
           ECR_REGISTRY: 433213351671.dkr.ecr.ap-northeast-1.amazonaws.com
           ECR_REPOSITORY: test
-          IMAGE_TAG: v1.0.0-rc.3
+          IMAGE_TAG: test1.1.1
         run: |
               MANIFEST=$(aws ecr batch-get-image --registry-id 433213351671 --repository-name "$ECR_REPOSITORY" --image-ids imageTag=v1.0.0-rc.2 --output json | jq --raw-output --join-output '.images[0].imageManifest')
               aws ecr put-image --registry-id 433213351671 --repository-name "$ECR_REPOSITORY" --image-tag "$IMAGE_TAG" --image-manifest "$MANIFEST"
