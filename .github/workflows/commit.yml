@@ -33,5 +33,5 @@ jobs:
           ECR_REPOSITORY: test
           IMAGE_TAG: main
         run: |
-          aws ecr describe-image-replication-status --repository-name "$ECR_REPOSITORY" --image-id imageTag=image_tag  
+          aws ecr describe-image-replication-status --repository-name "$ECR_REPOSITORY" --image-id imageTag="$IMAGE_TAG"  
       # --region us-west-2
