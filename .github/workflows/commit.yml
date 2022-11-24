@@ -41,5 +41,5 @@ jobs:
           timeout_seconds: 60
           retry_wait_seconds: 60
           max_attempts: 5
-          command: aws ecr describe-image-replication-status --repository-name test --image-id imageTag=v1.0-rc.1
+          command: aws ecr describe-image-replication-status --repository-name test --image-id imageTag=v1.0-rc.1 | jq '.repositoryName'
       # --region us-west-2
