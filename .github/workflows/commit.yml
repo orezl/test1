@@ -37,7 +37,8 @@ jobs:
           
       - uses: nick-fields/retry@v2
         with:
-          timeout_minutes: 10
-          max_attempts: 3
+          timeout_seconds: 60
+          retry_wait_seconds: 60
+          max_attempts: 5
           command: aws ecr describe-image-replication-status --repository-name test --image-id imageTag=main1234
       # --region us-west-2
