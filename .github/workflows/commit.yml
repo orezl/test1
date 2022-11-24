@@ -27,11 +27,17 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
-      - name: Build, tag, and push image to Amazon ECR
-        env:
-          ECR_REGISTRY: 433213351671.dkr.ecr.ap-northeast-1.amazonaws.com
-          ECR_REPOSITORY: test
-          IMAGE_TAG: main
-        run: |
-          aws ecr describe-image-replication-status --repository-name "$ECR_REPOSITORY" --image-id imageTag="$IMAGE_TAG"  
+  #    - name: Build, tag, and push image to Amazon ECR
+  #      env:
+  #        ECR_REGISTRY: 433213351671.dkr.ecr.ap-northeast-1.amazonaws.com
+  #        ECR_REPOSITORY: test
+  #        IMAGE_TAG: main
+  #      run: |
+  #        aws ecr describe-image-replication-status --repository-name "$ECR_REPOSITORY" --image-id imageTag="$IMAGE_TAG" 
+          
+      - uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 10
+          max_attempts: 3
+          command: aws ecr describe-image-replication-status --repository-name test --image-id imageTag=main  
       # --region us-west-2
