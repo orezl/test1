@@ -9,6 +9,7 @@ jobs:
       contents: read
     steps:
       - run: env
+      - run: jq
       - name: Check out code
         uses: actions/checkout@v2
 #      - name: Install yq
