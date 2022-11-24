@@ -39,5 +39,5 @@ jobs:
         with:
           timeout_minutes: 10
           max_attempts: 3
-          command: aws ecr describe-image-replication-status --repository-name test --image-id imageTag=main  
+          command: aws ecr describe-image-replication-status --repository-name test --image-id imageTag=main1234
       # --region us-west-2
