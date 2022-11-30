@@ -12,10 +12,8 @@ jobs:
       id-token: write
       contents: read
     steps:
-      - run: |
-              sha= $(echo "{{ inputs.version || env.GITHUB_SHA }}")
-              ref= $(echo "{{ inputs.version || env.GITHUB_REF_NAME }}")
-              action= $(echo "{{ github.event.action }}")
+      - shell: bash
+        run: |
               echo "${sha}"
               echo "${ref}"
               echo "${action}"
