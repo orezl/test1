@@ -13,9 +13,9 @@ jobs:
       contents: read
     steps:
       - run: |
-              sha= $("{{ inputs.version || env.GITHUB_SHA }}")
-              ref= $("{{ inputs.version || env.GITHUB_REF_NAME }}")
-              action= $("{{ github.event.action }}")
+              sha= $(echo "{{ inputs.version || env.GITHUB_SHA }}")
+              ref= $(echo "{{ inputs.version || env.GITHUB_REF_NAME }}")
+              action= $(echo "{{ github.event.action }}")
               echo "${sha}"
               echo "${ref}"
               echo "${action}"
