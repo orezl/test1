@@ -17,9 +17,9 @@ jobs:
       action: ${{ env.github.event.action }}
     steps:
       - run: |
-              echo "${GITHUB_SHA}"
-              echo "${GITHUB_REF_NAME}"
-              echo "${{github.event.action}}"
+              echo "${sha}"
+              echo "${ref}"
+              echo "${{action}}"
       - name: Check out code
         uses: actions/checkout@v2
 #      - name: Install yq
