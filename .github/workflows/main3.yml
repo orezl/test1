@@ -19,7 +19,7 @@ jobs:
         env:
           sha: ${{ inputs.version || env.GITHUB_SHA }} 
           ref: ${{ inputs.version || env.GITHUB_REF_NAME }}
-          action: ${{ env.github.event.action }} 
+          action: ${{ github.event.action }} 
       - run: env
       - name: Check out code
         uses: actions/checkout@v2
