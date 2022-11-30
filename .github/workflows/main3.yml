@@ -18,8 +18,9 @@ jobs:
               echo "${action}"
         env:
           sha: ${{ env.GITHUB_SHA || inputs.version }} 
-          ref: ${{ inputs.version || env.GITHUB_REF_NAME }}
-          action: ${{ env.github.event.action }}              
+          ref: ${{ inputs.version ||  }}
+          action: ${{ env.github.event.action }} 
+      - run: env
       - name: Check out code
         uses: actions/checkout@v2
 #      - name: Install yq
