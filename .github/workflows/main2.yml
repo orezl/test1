@@ -3,20 +3,23 @@ on:
   release:
     types: [prereleased]
   workflow_dispatch:
-    inputs:
-      image_version: {required: true, description: "Pre-release published image version"}
+      inputs:
+        version: {required: true, description: "version"}
 jobs:
   release:
     runs-on: ubuntu-latest
     permissions:
       id-token: write
       contents: read
+    env:
+      sha: ${{ env.GITHUB_SHA }}
+      ref: ${{ inputs.version || env.GITHUB_REF_NAME }}
+      action: ${{ env.github.event.action }}
     steps:
       - run: |
-              env
-              echo "${GITHUB_SHA}"
-              echo "${GITHUB_REF_NAME}"
-              echo "${{github.event.action}}"
+              echo "${sha}"
+              echo "${ref}"
+              echo "${{action}}"
       - name: Check out code
         uses: actions/checkout@v2
 #      - name: Install yq
