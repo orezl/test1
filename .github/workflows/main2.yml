@@ -15,7 +15,7 @@ jobs:
       - run: |
               echo "${sha}"
               echo "${ref}"
-              echo "${{action}}"
+              echo "${action}"
         env:
           sha: ${{ env.GITHUB_SHA || inputs.version }} 
           ref: ${{ inputs.version || env.GITHUB_REF_NAME }}
