@@ -11,16 +11,20 @@ jobs:
     permissions:
       id-token: write
       contents: read
+    env:
+      sha: ${{ inputs.version || github.sha }}
+      ref: ${{ inputs.version || github.ref_name }}
+      action: ${{ github.event.action }} 
     steps:
       - shell: bash
         run: |
               echo "${sha}"
               echo "${ref}"
               echo "${action}"
-        env:
-          sha: ${{ inputs.version || github.sha }}
-          ref: ${{ inputs.version || github.ref_name }}
-          action: ${{ github.event.action }} 
+       # env:
+       #   sha: ${{ inputs.version || github.sha }}
+       #   ref: ${{ inputs.version || github.ref_name }}
+       #   action: ${{ github.event.action }} 
       - run: env
       - name: Check out code
         uses: actions/checkout@v2
