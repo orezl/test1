@@ -12,15 +12,15 @@ jobs:
     permissions:
       id-token: write
       contents: read
-    env:
-      sha: ${{ env.GITHUB_SHA || inputs.version }} 
-      ref: ${{ inputs.version || env.GITHUB_REF_NAME }}
-      action: ${{ env.github.event.action }}
     steps:
       - run: |
               echo "${sha}"
               echo "${ref}"
               echo "${{action}}"
+        env:
+          sha: ${{ env.GITHUB_SHA || inputs.version }} 
+          ref: ${{ inputs.version || env.GITHUB_REF_NAME }}
+          action: ${{ env.github.event.action }}
       - name: Check out code
         uses: actions/checkout@v2
 #      - name: Install yq
