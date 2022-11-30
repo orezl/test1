@@ -1,21 +1,26 @@
 name: ci-dv-publish
 on:
-  workflow_dispatch:
   push:
     branches: ['main']
     paths-ignore: ['.github/**']
+  workflow_dispatch:
+      inputs:
+        version: {required: true, description: "version"}
 jobs:
-  Publish_Image:
+  release:
     runs-on: ubuntu-latest
     permissions:
       id-token: write
       contents: read
+    env:
+      sha: ${{ env.GITHUB_SHA }}
+      ref: ${{ inputs.version || env.GITHUB_REF_NAME }}
+      action: ${{ env.github.event.action }}
     steps:
       - run: |
-              env
-              echo "${GITHUB_SHA}"
-              echo "${GITHUB_REF_NAME}"
-              echo "${{github.event.action}}"
+              echo "${sha}"
+              echo "${ref}"
+              echo "${{action}}"
       - name: Check out code
         uses: actions/checkout@v2
 #      - name: Install yq
