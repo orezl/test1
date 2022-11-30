@@ -18,8 +18,8 @@ jobs:
               echo "${ref}"
               echo "${action}"
         env:
-          sha: ${{ github.sha }}
-          ref: ${{ github.ref_name }}
+          sha: ${{ inputs.version || github.sha }}
+          ref: ${{ inputs.version || github.ref_name }}
           action: ${{ github.event.action }} 
       - run: env
       - name: Check out code
