@@ -15,7 +15,7 @@ def upload_objects():
             for file in files:
                 full_path = os.path.join(subdir, file)
                 with open(full_path, 'rb') as data:
-                    bucket.put_object(Key=full_path[len(path)+1:], Body=data)
+                    my_bucket.put_object(Key=full_path[len(path)+1:], Body=data)
         print(" ...Success")
     except Exception as err:
         print(err)
