@@ -20,7 +20,7 @@ def upload_objects():
                 print('file to upload',os.path.join(path, file))
                 print('file path',directory_name+'/'+file)
                 
-                my_bucket.upload_file(os.path.join(path, file), directory_name+'/'+file)
+                my_bucket.upload_file(os.path.join(path, file), os.path.join(directory_name, file))
 
         print(" ...Success")
     except Exception as err:
