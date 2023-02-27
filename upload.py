@@ -11,7 +11,7 @@ def upload_objects():
         bucket_name = "rahulkhannatest123" #s3 bucket name
 
         my_bucket = s3_resource.Bucket(bucket_name)
-        for path, dirs, files in os.walk(root_path):
+        for subdir, dirs, files in os.walk(root_path):
             for file in files:
                 full_path = os.path.join(subdir, file)
                 with open(full_path, 'rb') as data:
