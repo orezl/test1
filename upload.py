@@ -8,6 +8,7 @@ s3_resource = boto3.resource("s3", region_name="us-east-1")
 args = parser.parse_args()  
 
 print(args.root_path)
+root_path=args.root_path+'/simple-reactjs-app/build'
 def upload_objects():
     try:
         bucket_name = "rahulkhannatest123" #s3 bucket name
