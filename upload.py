@@ -11,11 +11,17 @@ def upload_objects():
         bucket_name = "rahulkhannatest123" #s3 bucket name
 
         my_bucket = s3_resource.Bucket(bucket_name)
-        for subdir, dirs, files in os.walk(root_path):
+        for path, subdirs, files in os.walk(root_path):
+            path = path.replace("\\","/")
+            print('path:',path)
+            directory_name = path.replace(root_path,"")
+            print('directory_name:',directory_name)
             for file in files:
-                full_path = os.path.join(subdir, file)
-                with open(full_path, 'rb') as data:
-                    my_bucket.put_object(Key=full_path[len(path)+1:], Body=data)
+                print('file to upload',os.path.join(path, file))
+                print('file path',directory_name+'/'+file)
+                
+                my_bucket.upload_file(os.path.join(path, file), directory_name+'/'+file)
+
         print(" ...Success")
     except Exception as err:
         print(err)
