@@ -13,11 +13,10 @@ def upload_objects():
         my_bucket = s3_resource.Bucket(bucket_name)
         for path, dirs, files in os.walk(root_path):
             for file in files:
-                file_s3 = os.path.normpath(path + '/' + file)
-                file_local = os.path.join(path, file)
-                print("Upload:", file_local, "to target:", file_s3, end="")
-                client.upload_file(file_local, bucketname, file_s3)
-                print(" ...Success")
+                full_path = os.path.join(subdir, file)
+                with open(full_path, 'rb') as data:
+                    bucket.put_object(Key=full_path[len(path)+1:], Body=data)
+        print(" ...Success")
     except Exception as err:
         print(err)
 
