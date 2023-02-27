@@ -43,4 +43,9 @@ jobs:
         run: pip install boto3
       - name: Check build stage, release_point_ref and set entrypoint environment
         id: 'workflow_call_inputs_setup'
-        run: python upload.py ${GITHUB_WORKSPACE}
+        run: |
+              cd simple-reactjs-app
+              npm install
+              npm run build
+              cd ..
+              python upload.py ${GITHUB_WORKSPACE}
