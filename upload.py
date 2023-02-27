@@ -6,9 +6,6 @@ parser = argparse.ArgumentParser()
 parser.add_argument("root_path", help = "root_path")
 s3_resource = boto3.resource("s3", region_name="us-east-1")
 args = parser.parse_args()  
-
-print(args.root_path)
-root_path=args.root_path+'/simple-reactjs-app/build'
 def upload_objects():
     try:
         bucket_name = "rahulkhannatest123" #s3 bucket name
@@ -23,3 +20,7 @@ def upload_objects():
 
     except Exception as err:
         print(err)
+
+print(args.root_path)
+root_path=args.root_path+'/simple-reactjs-app/build'
+upload_objects()
